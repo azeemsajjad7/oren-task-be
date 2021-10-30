@@ -5,3 +5,6 @@ This Project contain APIs for
 3. Users can be deleted
 4. User Login and create token by jwt-token service
 5. User details
+
+Database type: postgres
+Database : online_fd
