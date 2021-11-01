@@ -41,8 +41,10 @@ export class UserService {
 
         let token = jwt.sign(
           {
+            username: userObj.username,
             user_id: userObj.id,
             email: userObj.email,
+            address: userObj.address,
           },
           process.env.TOKEN_SECRET,
         );

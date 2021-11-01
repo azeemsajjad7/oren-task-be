@@ -1,4 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { mail } from './mail.entity';
 
 @Entity()
 export class users_user {
@@ -32,4 +39,6 @@ export class users_user {
 
   @Column('boolean', { name: 'active' })
   active: boolean;
+
+  @OneToMany((type) => mail, (mail) => mail.user_) mails: mail[];
 }
