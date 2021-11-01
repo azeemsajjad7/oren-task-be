@@ -9,8 +9,6 @@ export class MailgunController {
 
   @Get('send-mail')
   async sendMail(@Req() req) {
-    console.log(req);
-
     return await this.mailgunService.sendMail(
       req.decoded.email,
       req.decoded.user_id,

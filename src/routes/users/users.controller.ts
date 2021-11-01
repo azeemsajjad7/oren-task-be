@@ -1,4 +1,14 @@
-import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Put,
+  Req,
+  UseGuards,
+} from '@nestjs/common';
+import { AuthGuard } from 'src/auth.guard';
 import { CreateUserBody, LoginUserBody, UpdateUserBody } from './users.dto';
 import { UserService } from './users.service';
 
@@ -29,8 +39,6 @@ export class UserController {
         token: await this.userService.loginUser(loginUserBody),
       };
     } catch (error) {
-      console.log(error);
-
       return {
         success: false,
         error: error,
@@ -55,12 +63,13 @@ export class UserController {
     }
   }
 
-  @Get('get-user/:user_id')
-  async getUser(@Param() param) {
+  @Get('get-user')
+  @UseGuards(AuthGuard)
+  async getUser(@Req() req) {
     try {
       return {
         success: true,
-        result: await this.userService.getUser(param.user_id),
+        result: await this.userService.getUser(req.decoded.user_id),
       };
     } catch (error) {
       return {
@@ -71,15 +80,17 @@ export class UserController {
   }
 
   @Post('update-user')
-  async updateUser(@Body() updateUserBody: UpdateUserBody) {
+  @UseGuards(AuthGuard)
+  async updateUser(@Body() updateUserBody: UpdateUserBody, @Req() req) {
     try {
       return {
         success: true,
-        result: await this.userService.updateUser(updateUserBody),
+        result: await this.userService.updateUser(
+          updateUserBody,
+          req.decoded.user_id,
+        ),
       };
     } catch (error) {
-      console.log(error);
-
       return {
         success: false,
         error: error,

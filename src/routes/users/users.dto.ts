@@ -43,7 +43,6 @@ export class UpdateUserBody {
   @ApiProperty()
   @IsNotEmpty()
   username: string;
-  id: number;
 
   @ApiProperty()
   @IsNotEmpty()

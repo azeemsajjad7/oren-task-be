@@ -4,6 +4,7 @@ import { getConnection } from 'typeorm';
 import { users_user } from 'src/entities/users_user.entity';
 import * as jwt from 'jsonwebtoken';
 import * as bcrypt from 'bcrypt';
+import { cart } from 'src/entities/cart.entity';
 
 @Injectable()
 export class UserService {
@@ -21,6 +22,7 @@ export class UserService {
       updated_on: new Date(),
       active: true,
     });
+
     return user ? true : false;
   }
 
@@ -73,10 +75,10 @@ export class UserService {
       .findOne({ id: user_id });
   }
 
-  async updateUser(updateUserBody: UpdateUserBody) {
+  async updateUser(updateUserBody: UpdateUserBody, user_id: number) {
     let userObj = await getConnection()
       .getRepository(users_user)
-      .findOne({ id: updateUserBody.id });
+      .findOne({ id: user_id });
 
     userObj.username = updateUserBody.username;
     userObj.address = updateUserBody.address;

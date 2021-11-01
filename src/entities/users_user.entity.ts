@@ -1,10 +1,5 @@
-import {
-  Column,
-  Entity,
-  ManyToOne,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { cart } from './cart.entity';
 import { mail } from './mail.entity';
 
 @Entity()
@@ -41,4 +36,6 @@ export class users_user {
   active: boolean;
 
   @OneToMany((type) => mail, (mail) => mail.user_) mails: mail[];
+
+  @OneToMany((type) => cart, (cart) => cart.user_) carts: cart[];
 }

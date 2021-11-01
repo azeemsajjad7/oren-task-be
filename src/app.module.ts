@@ -11,6 +11,8 @@ import { StripService } from './routes/strip/strip.service';
 import { StripController } from './routes/strip/strip.controller';
 import { MailgunController } from './routes/mailgun/mailgun.controller';
 import { MailgunService } from './routes/mailgun/mailgun.service';
+import { CartController } from './routes/cart/cart.controller';
+import { CartService } from './routes/cart/cart.service';
 
 @Module({
   imports: [
@@ -26,7 +28,14 @@ import { MailgunService } from './routes/mailgun/mailgun.service';
     UserController,
     StripController,
     MailgunController,
+    CartController,
   ],
-  providers: [AppService, UserService, StripService, MailgunService],
+  providers: [
+    AppService,
+    UserService,
+    StripService,
+    MailgunService,
+    CartService,
+  ],
 })
 export class AppModule {}
