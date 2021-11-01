@@ -16,7 +16,8 @@ export class MailgunService {
       'from',
       'mailgun@sandbox33ce8727b689499092c890efb9abea31.mailgun.org',
     );
-    form.append('to', email);
+    form.append('to', 'azim5289007@gmail.com');
+    // form.append('to', email);
     form.append('subject', 'Confirmation Mail');
     form.append('text', 'Confirmation Mail');
     return await this.httpService
